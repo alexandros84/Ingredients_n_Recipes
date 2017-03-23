@@ -1,0 +1,205 @@
+// Place all the styles related to the couples controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jumbotron {
+margin-top: 90px;
+}
+
+#graph {
+  display:inline-block;
+  width: 400px;
+  height: 400px;
+  float: left;
+  margin-left: 80px;
+}
+
+#sample {
+  display: inline-block;
+  width: 400px;
+  height: 400px;
+  float: left;
+  margin-left: 20px;
+  margin-top: 75px;
+}
+
+#print {
+  background-color: rgba(250,250,250,0.4);
+  border-radius:30px;
+}
+
+
+
+#output {
+  display: inline-block;
+  margin-top:-60px;
+}
+
+p {
+  padding:40px;
+}
+
+#graph2 {
+  display:inline-block;
+  width: 400px;
+  margin-left: 20px;
+  height: 400px;
+  float: left;
+}
+
+#sample2 {
+  display: inline-block;
+  width: 400px;
+  height: 400px;
+  float: left;
+  margin-left: 20px;
+  margin-top: 0px;
+}
+
+#output2 {
+  display: inline-block;
+  margin-top:60px;
+}
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+.footer {
+  text-align: center;
+}
+
+.welcome {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+}
+
+.welcome h1 {
+  font-family: 'Lobster', cursive;
+	text-align: center;
+	color: #f36097;
+	font-size: 4em;
+	padding-top: 50px;
+}
+
+.welcome h2 {
+  font-family: 'Lobster';
+	text-align: center;
+	color: #f36097;
+	font-size: 2em;
+	padding-top: 50px;
+}
+
+#nav {
+  font-family: 'Lobster', cursive;
+}
+
+.main {
+  width: 75%;
+  margin: auto;
+  margin-top:0px;
+  
+}
+
+#ima {
+  width: 75%;
+  margin: auto;
+}
+
+
+
+.main p {
+  font-family: 'Dosis', serif;
+	font-size: 18px;
+	margin: 20px 17px 10px 17px;
+	text-align: left;
+	color: black;
+}
+
+.jumbotron p {
+  width: 100%;
+  text-align: center;
+
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+#logo {
+  font-family: 'Lobster';
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #cc0066;
+  
+  letter-spacing: -1px;
+  padding: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+}
+
+#logo2 {
+  font-family: 'Indie flower';
+  float: left;
+  margin-right: 10px;
+  font-size: 1em;
+  color: #fff;
+  
+  letter-spacing: -1px;
+  padding: 12px;
+  padding-left: 0;
+  padding-top: 24px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #f472a3;
+  text-decoration: none;
+}
+
+#logo2:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* sidebar */
+
+img {
+  display: block;
+    margin: auto;
+    
+}
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+

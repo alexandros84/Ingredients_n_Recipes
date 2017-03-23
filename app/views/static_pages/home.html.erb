@@ -1,0 +1,5 @@
+  <% if current_user.nil? %>
+  <%= link_to "Sign up", signup_path %> for the best cooking management experience of your life!
+  <% else %>
+  Hey, <%= current_user.name %>! Welcome to the eternal bliss of a well-managed kitchen ;)
+  <% end %>

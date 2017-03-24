@@ -1,0 +1,15 @@
+<%= b=@recipe.attributes.to_a %>
+<%= b[1][1] %><br><br>
+Ingredients:<br><br>
+<% (2..13).each do |x| %>
+<% if b[x][1]==0 %>
+<% else %>
+<%= "#{b[x][0]}: #{b[x][1]}" %>
+<% end %>
+<% end %><br><br>
+Execution:<br><br>
+<%= b.last[1] %>
+<br><br>
+<p style="width: 100%, text-align: center; margin: 0 auto;">
+<%= link_to "Back to profile", @user %> | <%= link_to "All of my beloved recipies", root_path %>
+</span>

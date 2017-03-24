@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323104404) do
+ActiveRecord::Schema.define(version: 20170324005225) do
+
+  create_table "_inventories", force: :cascade do |t|
+    t.string   "title",      default: "My Recipe"
+    t.integer  "herbs",      default: 0
+    t.integer  "salt",       default: 0
+    t.integer  "pepper",     default: 0
+    t.integer  "bananas",    default: 0
+    t.integer  "chocolate",  default: 0
+    t.integer  "meat",       default: 0
+    t.integer  "greens",     default: 0
+    t.integer  "olive_oil",  default: 0
+    t.integer  "eggs",       default: 0
+    t.integer  "butter",     default: 0
+    t.integer  "tomatoes",   default: 0
+    t.integer  "onions",     default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["user_id"], name: "index__inventories_on_user_id"
+  end
 
   create_table "inventories", force: :cascade do |t|
     t.string   "title",      default: "My Inventory"
@@ -30,6 +50,27 @@ ActiveRecord::Schema.define(version: 20170323104404) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["user_id"], name: "index_inventories_on_user_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "title",      default: "My Recipe"
+    t.integer  "herbs",      default: 0
+    t.integer  "salt",       default: 0
+    t.integer  "pepper",     default: 0
+    t.integer  "bananas",    default: 0
+    t.integer  "chocolate",  default: 0
+    t.integer  "meat",       default: 0
+    t.integer  "greens",     default: 0
+    t.integer  "olive_oil",  default: 0
+    t.integer  "eggs",       default: 0
+    t.integer  "butter",     default: 0
+    t.integer  "tomatoes",   default: 0
+    t.integer  "onions",     default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
+    t.text     "execution",  default: "Throw it all in a cauldron and hope for the best!"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,7 +1,7 @@
 class CreateInventories < ActiveRecord::Migration[5.0]
   def change
-    create_table :inventories do |t|
-      t.string :title, default: "My Inventory"
+    create_table :_inventories do |t|
+      t.string :title, default: "My Recipe"
       t.integer :herbs, default: 0
       t.integer :salt, default: 0
       t.integer :pepper, default: 0

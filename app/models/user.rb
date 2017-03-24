@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   
-    has_one :inventory
+    has_one :_inventory, dependent: :destroy 
+    has_many :recipes, dependent: :destroy
     after_create :create_inventory
   
   #attr_accessor :remember_token
@@ -31,7 +32,7 @@ class User < ApplicationRecord
     #end
     
     def create_inventory
-      self.build_inventory
+      self.build__inventory
     end
     
 end

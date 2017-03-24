@@ -1,5 +1,24 @@
+  <br><br>
   <% if current_user.nil? %>
   <%= link_to "Sign up", signup_path %> for the best cooking management experience of your life!
   <% else %>
-  Hey, <%= current_user.name %>! Welcome to the eternal bliss of a well-managed kitchen ;)
+  <br>
+  Hey, <%= link_to "#{current_user.name}", current_user %>! Welcome to the beautiful world of a 
+  well-managed kitchen ;)
+  <br><br><br>
   <% end %>
+  <% current_user.recipes.all.each do |x| %>
+  
+  <span style="font-size: 25px;"><%= x.title %></span><br><br>
+  
+  Key ingredients:<br>
+  <%= x.attributes.to_a[2..13].sort{|x,y| x[1]<=>y[1]}.reverse.first(5).flatten %><br><br>
+  
+  Execution:<br>
+  <%= x.execution.split("").first(70).join %>...<br><br>
+  <%= link_to "See more", user_recipe_path(current_user, x) %> | 
+  <%= link_to "Execute", "#" %> | 
+  <%= link_to "Edit Recipe", edit_user_recipe_path(current_user, x) %><br><br>
+  <% end %>
+  <%= link_to "New recipe?", new_user_recipe_path(current_user, @recipe) %>
+  

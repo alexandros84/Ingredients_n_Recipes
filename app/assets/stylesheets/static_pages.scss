@@ -41,9 +41,9 @@ p {
 
 #graph2 {
   display:inline-block;
-  width: 400px;
+  width: 370px;
   margin-left: 20px;
-  height: 400px;
+  height: 340px;
   float: left;
 }
 
@@ -178,6 +178,20 @@ p {
 #logo2:hover {
   color: #fff;
   text-decoration: none;
+}
+
+.wrapper {
+  border: 1px solid #bbb;
+  width: 240px;
+  height:340px;
+  float: left;
+  margin: 25px;
+  padding:20px;
+}
+
+.ultra {
+  width: 90%;
+  margin: auto;
 }
 
 

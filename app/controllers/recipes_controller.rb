@@ -36,13 +36,13 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find_by(id: params[:id])
     @user = User.find_by(id: @recipe.user_id)
-    if @recipe.update_attributes(recipe_params)
-      flash[:success] = "Recipe updated"
-      redirect_to user_recipe_path(@user, @recipe)
-  else
-      flash[:danger]= "Something went wrong! Please try again."
-      render 'edit'
-  end
+      if @recipe.update_attributes(recipe_params)
+        flash[:success] = "Recipe updated"
+        redirect_to user_recipe_path(@user, @recipe)
+      else
+        flash[:danger]= "Something went wrong! Please try again."
+        render 'edit'
+      end
   end
   
               private

@@ -1,13 +1,15 @@
   <br><br>
   <% if current_user.nil? %>
-  <%= link_to "Sign up", signup_path %> for the best cooking management experience of your life!
+  <%= link_to "Sign up", signup_path %> or <%= link_to "log in", login_path %>
+  for the best cooking management experience of your life!
   <% else %>
+  
   <br>
   Hey, <%= link_to "#{current_user.name}", current_user %>! Welcome to the beautiful world of a 
   well-managed kitchen ;)
-  <br><br><br><span style="font-family: Lobster; font-size: 32px;">Suggestions</span><br><br>
-  <% end %>
   
+  <br><br><br><span style="font-family: Lobster; font-size: 32px;">Suggestions</span><br><br>
+
   <div class="ultra">
   <% current_user.recipes.take(3).each do |x| %>
   <div class="wrapper">
@@ -34,8 +36,14 @@
   
   <span style="font-family: Lobster; margin-left: 5%; font-size: 32px;">All recipes</span><br><br>
   
+  <% current_user.recipes.all.each do |x| %>
+  <%= link_to "#{x.title}", user_recipe_path(current_user,x) %> | <br>
+  <%= x.attributes.to_a[2..13] %> | <br> 
   
-  <%= link_to "New recipe?", new_user_recipe_path(current_user, @recipe) %>
+  <%= link_to "Execute this recipe", user_drawer_recipe_custom_update_url(drawer_id: "#{@drawer.id}", recipe_id: "#{x.id}", user_id: "#{current_user.id}" ) %> <br>
+  <% end %>
+  
+  <br><br><%= link_to "New recipe?", new_user_recipe_path(current_user, @recipe) %>
 
   
-  
+  <% end %>

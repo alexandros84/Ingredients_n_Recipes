@@ -45,6 +45,13 @@ class RecipesController < ApplicationController
       end
   end
   
+  def custom_update
+    @drawer = Drawer.find_by(id: current_user.drawers.first.id)
+    @recipe = Recipe.find_by(id: params[:recipe_id])
+    @drawer.update_attributes(herbs: @drawer.herbs-@recipe.herbs, salt: @drawer.salt-@recipe.salt)
+    redirect_to current_user
+  end
+  
               private
             
                 def recipe_params

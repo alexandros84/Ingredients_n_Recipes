@@ -1,4 +1,38 @@
 <%= @user.name %><br><br>
-
-<br><br>
 <%= link_to "New recipe?", new_user_recipe_path(@user, @recipe) %>
+|| 
+<%= link_to "Go shopping!", user_drawer_go_shopping_you_fool_url(drawer_id: "#{@drawer.id}", 
+ user_id: "#{current_user.id}" ) %> 
+<br><br>
+My inventory:<br>
+<%= @user.drawers.first.attributes.to_a[2..13] %>
+<br><br>
+
+My recipes:<br><br>
+
+      <% current_user.recipes.all.each do |c| %>
+    
+  <% memo=c.attributes.to_a[2..13] %>
+  <%= c.title %><br>
+      
+  <% memo.map do |x| %>
+<%= x[1]==0 ? "" : " #{x[0]}: #{x[1]} |" %> 
+  <% end %><br>
+
+<%# memo.each do |x| %>
+<%#= x[1]>@drawer.send(x[0]) ? "Yes" : "No" %>
+<%# end %>
+
+  <%# if (memo.each {|z| z[1]>=@drawer.send(z[0]) return false }) %>
+<%= link_to "Execute+", user_drawer_recipe_custom_update_url(drawer_id: "#{@drawer.id}", 
+recipe_id: "#{c.id}", user_id: "#{current_user.id}" ) %><br><br>
+  <%# else %>
+<!-- You do not have enough resources to execute this recipe: Please go 
+<%#= link_to "shopping", user_drawer_go_shopping_you_fool_url(drawer_id: "#{@drawer.id}", user_id: "#{current_user.id}" ) %>
+first! <br><br> -->
+  <%# end %>
+    
+
+
+
+      <% end %>

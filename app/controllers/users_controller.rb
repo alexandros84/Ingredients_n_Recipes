@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @drawer = Drawer.find_by(id: current_user.drawers.first.id)
     flash.now[:success]="hey, #{@user.name} don't forget that you are cool! <3"
   end
   

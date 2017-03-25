@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   
-    has_one :_inventory, dependent: :destroy 
+    has_many :drawers, dependent: :destroy 
     has_many :recipes, dependent: :destroy
-    after_create :create_inventory
+    after_create :create_drawer
   
   #attr_accessor :remember_token
   
@@ -31,8 +31,8 @@ class User < ApplicationRecord
     #update_attribute(:remember_digest, User.digest(remember_token))
     #end
     
-    def create_inventory
-      self.build__inventory
+    def create_drawer
+      self.drawers.create
     end
     
 end

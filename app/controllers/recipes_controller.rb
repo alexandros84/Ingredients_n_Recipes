@@ -48,7 +48,27 @@ class RecipesController < ApplicationController
   def custom_update
     @drawer = Drawer.find_by(id: current_user.drawers.first.id)
     @recipe = Recipe.find_by(id: params[:recipe_id])
-    @drawer.update_attributes(herbs: @drawer.herbs-@recipe.herbs, salt: @drawer.salt-@recipe.salt)
+    b=@recipe.attributes.to_a[2..13]
+    c=@drawer.attributes.to_a[2..13]
+    a=[]
+    
+    b.map!.with_index do |x,y|
+        x[1]==0? x=nil : x=x[1] && a << y 
+    end
+    b.compact!
+    
+    phrase=c.map!.with_index do |c,y|
+      (a.include? y)? c=c[0] : c=nil
+    end
+    c.compact!
+    
+    phrase=c.map!.with_index do |c,y|
+      c="#{c}: @drawer.#{c}-@recipe.#{c}, "
+    end
+      
+    phrase=phrase.join.split("").reverse.drop(2).reverse.join
+    phrase="{"+phrase+"}"
+    @drawer.update_attributes(eval(phrase))
     redirect_to current_user
   end
   

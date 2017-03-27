@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   
     has_many :drawers, dependent: :destroy 
-    has_many :recipes, dependent: :destroy
+    has_many :recipes, through: :ingredients, dependent: :destroy
     after_create :create_drawer
   
   #attr_accessor :remember_token
@@ -22,14 +22,6 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
     end
     
-    #def User.new_token
-    #SecureRandom.urlsafe_base64
-    #end
-    
-    #def remember
-    #self.remember_token = User.new_token
-    #update_attribute(:remember_digest, User.digest(remember_token))
-    #end
     
     def create_drawer
       self.drawers.create

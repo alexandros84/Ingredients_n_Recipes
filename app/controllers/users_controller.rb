@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :check_logged_in, only: [:edit, :show, :update]
-    before_action :check_if_authorized, only: [:edit, :show, :update]
+  before_action :check_if_authorized, only: [:edit, :show, :update]
   
   def show
     @user = User.find(params[:id])

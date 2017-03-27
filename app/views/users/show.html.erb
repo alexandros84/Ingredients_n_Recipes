@@ -7,13 +7,22 @@
 My inventory:<br>
 <%= @user.drawers.first.attributes.to_a[2..13] %>
 <br><br>
+<% (2..13).each do |ingr| %>
+<% if Recipe.minimum(ingr.to_s)>Drawer.maximum(ingr.to_s) %>
+<span style="color: red;">You are facing critical shortages on <%= ingr %>.</span>
+<% end %>
+<% end %>
 
 My recipes:<br><br>
 
       <% current_user.recipes.all.each do |c| %>
     
   <% memo=c.attributes.to_a[2..13] %>
-  <%= c.title %><br>
+  <span style="font-size: 21px;">
+  <%= c.title  %> </span>
+  (
+  <%= link_to "View recipe page", user_recipe_path(current_user, c) %> | 
+  <%= link_to "Edit this recipe", edit_user_recipe_path(current_user, c) %> )<br>
       
   <% memo.map do |x| %>
 <%= x[1]==0 ? "" : " #{x[0]}: #{x[1]} |" %> 
@@ -24,8 +33,9 @@ My recipes:<br><br>
 <%# end %>
 
   <%# if (memo.each {|z| z[1]>=@drawer.send(z[0]) return false }) %>
+<br><span style="border: 1px solid blue; padding: 3px; margin: 8px; border-radius: 2px;">
 <%= link_to "Execute+", user_drawer_recipe_custom_update_url(drawer_id: "#{@drawer.id}", 
-recipe_id: "#{c.id}", user_id: "#{current_user.id}" ) %><br><br>
+recipe_id: "#{c.id}", user_id: "#{current_user.id}" ) %></span><br><br><br>
   <%# else %>
 <!-- You do not have enough resources to execute this recipe: Please go 
 <%#= link_to "shopping", user_drawer_go_shopping_you_fool_url(drawer_id: "#{@drawer.id}", user_id: "#{current_user.id}" ) %>

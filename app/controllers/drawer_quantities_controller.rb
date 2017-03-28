@@ -1,0 +1,2 @@
+class DrawerQuantitiesController < ApplicationController
+end

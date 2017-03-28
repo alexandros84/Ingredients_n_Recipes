@@ -20,9 +20,13 @@ Rails.application.routes.draw do
   resources :recipes
   end
   
+  resources :drawers do 
+  resources :drawer_quantities
+  end 
+  
   resources :users do 
   resources :drawers do 
-    get 'go_shopping_you_fool'
+    get 'go_shopping'
   resources :recipes do
     get 'custom_update'
       end

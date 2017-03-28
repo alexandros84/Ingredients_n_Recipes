@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   
     has_many :drawers, dependent: :destroy 
-    has_many :recipes, through: :ingredients, dependent: :destroy
+    has_many :ingredients, dependent: :destroy
+    has_many :recipes
     after_create :create_drawer
   
   #attr_accessor :remember_token

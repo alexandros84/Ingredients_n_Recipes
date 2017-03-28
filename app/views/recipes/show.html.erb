@@ -1,0 +1,8 @@
+<br><br>
+<% current_user.recipes.all.each do |x| %>
+<%= x.title %><br>
+<%= x.ingredient_list %><br>
+<% end %>
+<br><br>
+<%= link_to "User profile", current_user %>
+<br><br>

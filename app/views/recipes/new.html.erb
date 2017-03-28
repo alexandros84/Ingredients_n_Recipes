@@ -1,0 +1,19 @@
+<% provide(:title, 'New Recipe') %>
+<h1>Ingredients:</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <%= form_for @recipe, url: {action: "create"} do |f| %>
+      
+      <% b=@recipe.attributes.to_a %>
+
+      <%= f.label :ingredient_list %>
+      <%= f.text_field :ingredient_list  %>
+      
+      <%= f.label :execution %>
+      <%= f.text_area :execution, class: 'form-control' %>
+
+      <%= f.submit "Make this happen!", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

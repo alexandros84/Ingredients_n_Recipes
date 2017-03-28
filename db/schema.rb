@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327050452) do
+ActiveRecord::Schema.define(version: 20170328013529) do
+
+  create_table "drawer_quantities", force: :cascade do |t|
+    t.integer  "quantity",        default: 0
+    t.integer  "drawer_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "ingredient_name", default: "nothing in"
+    t.index ["drawer_id"], name: "index_drawer_quantities_on_drawer_id"
+  end
 
   create_table "drawers", force: :cascade do |t|
     t.string   "my_inventory", default: "My inventory"
@@ -23,39 +32,21 @@ ActiveRecord::Schema.define(version: 20170327050452) do
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       default: "nothing"
     t.integer  "recipe_id"
-    t.integer  "drawer_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["drawer_id"], name: "index_ingredients_on_drawer_id"
-    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
-  end
-
-  create_table "inventories", force: :cascade do |t|
-    t.string   "title",      default: "My Inventory"
-    t.integer  "herbs",      default: 0
-    t.integer  "salt",       default: 0
-    t.integer  "pepper",     default: 0
-    t.integer  "bananas",    default: 0
-    t.integer  "chocolate",  default: 0
-    t.integer  "meat",       default: 0
-    t.integer  "greens",     default: 0
-    t.integer  "olive_oil",  default: 0
-    t.integer  "eggs",       default: 0
-    t.integer  "butter",     default: 0
-    t.integer  "tomatoes",   default: 0
-    t.integer  "onions",     default: 0
+    t.integer  "quantity",   default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["user_id"], name: "index_inventories_on_user_id"
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+    t.index ["user_id"], name: "index_ingredients_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "title",      default: "My recipe"
+    t.string   "title",           default: "My recipe"
     t.text     "execution"
     t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.text     "ingredient_list", default: "Some of this n' some of that."
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 

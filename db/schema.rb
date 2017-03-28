@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328013529) do
+ActiveRecord::Schema.define(version: 20170328043025) do
 
-  create_table "drawer_quantities", force: :cascade do |t|
+  create_table "drawer_ingredients", force: :cascade do |t|
     t.integer  "quantity",        default: 0
     t.integer  "drawer_id"
     t.datetime "created_at",                             null: false
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20170328013529) do
   create_table "drawers", force: :cascade do |t|
     t.string   "my_inventory", default: "My inventory"
     t.integer  "user_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.text     "update_list",  default: "No updates yet."
     t.index ["user_id"], name: "index_drawers_on_user_id"
   end
 

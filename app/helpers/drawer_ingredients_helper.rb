@@ -1,0 +1,2 @@
+module DrawerIngredientsHelper
+end

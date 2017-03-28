@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DrawerQuantityTest < ActiveSupport::TestCase
+class DrawerIngredientTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

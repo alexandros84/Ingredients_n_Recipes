@@ -1,4 +1,16 @@
 class DrawersController < ApplicationController
+  
+    def edit 
+      @user=current_user
+      @drawer=current_user.drawers.first
+    end
+    
+    def update 
+    @user = User.find_by(id: params[:id])
+    @drawer = Drawer.find_by(id: params[:id])
+    @drawer.update_attributes(update_list: params[:update_list])
+    redirect_to edit_user_drawer_path(@user, @drawer)
+    end
     
     def go_shopping
     
@@ -14,5 +26,11 @@ class DrawersController < ApplicationController
    
     redirect_to current_user
     
+    end
+    
+    private
+    
+    def drawer_params
+      params.require(:drawer).permit(:update_list)
     end
 end

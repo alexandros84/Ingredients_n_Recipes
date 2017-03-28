@@ -8,7 +8,7 @@
       <% b=@recipe.attributes.to_a %>
 
       <%= f.label :ingredient_list %>
-      <%= f.text_field :ingredient_list  %>
+      <%= f.text_area :ingredient_list, class: 'form-control' %>
       
       <%= f.label :execution %>
       <%= f.text_area :execution, class: 'form-control' %>

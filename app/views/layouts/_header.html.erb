@@ -12,6 +12,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Inventory", edit_user_drawer_path(current_user, current_user.drawers.first) %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>

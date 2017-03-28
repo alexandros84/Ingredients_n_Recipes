@@ -1,8 +1,11 @@
 <br><br>
-<% current_user.recipes.all.each do |x| %>
-<%= x.title %><br>
-<%= x.ingredient_list %><br>
+
+<%= @recipe.title %><br><br>
+<% Ingredient.where(recipe_id: @recipe.id).each do |x| %>
+<%= x.name %>: 
+<%= x.quantity %> | 
 <% end %>
-<br><br>
+<br>
+<br>
 <%= link_to "User profile", current_user %>
 <br><br>

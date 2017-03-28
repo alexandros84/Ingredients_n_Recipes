@@ -1,0 +1,45 @@
+<br><br>
+<% a=DrawerIngredient.where(drawer_id: @drawer.id) %>
+<%= @drawer.my_inventory %>:<br><br>
+<% a.each do |x| %>
+<%= x.ingredient_name %>: 
+<%= x.quantity %> | 
+<% end %>
+<br><br>
+<% data = {
+  labels: a.to_a.map!{|x| x.ingredient_name },
+  datasets: [
+    {
+        label: "Mass Distribution",
+        backgroundColor: "rgba(15,275,217,0.7)",
+        borderColor: "rgba(15,217,175,1)",
+        data: a.to_a.map!{|x| x.quantity }
+    }
+  ]
+} %>
+<% options = { width: 300, height: 300 } %>
+<div id="graph2"><%= doughnut_chart data, options %></div>
+<br><br>
+Update your inventory: 
+<br><br>
+Instructions: to update the quantities of your inventory, simply enter the name of the ingredient present 
+in your inventory followed by a semi-colon and the amount of material you want to have in grams. 
+<br><br>Example: "peech:250". When you are happy with your changes simply press update.  
+<br><br>
+<% a.each do |x| %>
+<%= x.ingredient_name %>: 
+<%= x.quantity %> | 
+<% end %>
+<br><br>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <%= form_for @drawer, url: {action: "update"} do |f| %>
+      
+      <%= f.label :update_list %>
+      <%= f.text_area :update_list, class: 'form-control' %>
+      
+
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

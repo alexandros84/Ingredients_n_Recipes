@@ -20,8 +20,12 @@ Rails.application.routes.draw do
   resources :recipes
   end
   
+  resources :users do 
+  resources :drawers
+  end
+  
   resources :drawers do 
-  resources :drawer_quantities
+  resources :drawer_ingredients
   end 
   
   resources :users do 

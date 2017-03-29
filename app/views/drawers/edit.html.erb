@@ -1,6 +1,6 @@
 <br><br>
 <% a=DrawerIngredient.where(drawer_id: @drawer.id) %>
-<%= @drawer.my_inventory %>:<br><br>
+<%= link_to "User", current_user %>'s Inventory:<br><br>
 <% a.each do |x| %>
 <%= x.ingredient_name %>: 
 <%= x.quantity %> | 
@@ -22,9 +22,9 @@
 <br><br>
 Update your inventory: 
 <br><br>
-Instructions: to update the quantities of your inventory, simply enter the name of the ingredient present 
-in your inventory followed by a semi-colon and the amount of material you want to have in grams. 
-<br><br>Example: "peech:250". When you are happy with your changes simply press update.  
+Instructions: to update the quantities of your inventory, simply enter the name of the ingredient 
+present in your inventory followed by a semi-colon and the amount of material you 
+want to have in grams, like that: "peech: 250 appricot: 300". When you are happy with your changes simply press update.  
 <br><br>
 <% a.each do |x| %>
 <%= x.ingredient_name %>: 

@@ -5,11 +5,11 @@
  user_id: "#{current_user.id}" ) %> 
 <br><br>
 
-<%= @drawer.my_inventory %>:<br>
+<%= link_to "#{@drawer.my_inventory}", edit_user_drawer_path(@user, @drawer) %>: <br>
 <% DrawerIngredient.where(drawer_id: @drawer.id).each do |x| %>
 <%= x.ingredient_name %>: 
 <%= x.quantity %> | 
-<% end %>
+<% end %><br>
 
 <br><br>
 
@@ -21,13 +21,14 @@ My recipes:<br><br>
   <%= c.title  %> </span>
   (
   <%= link_to "View recipe page", user_recipe_path(current_user, c) %> | 
-  <%= link_to "Edit this recipe", edit_user_recipe_path(current_user, c) %> )<br>
+  <%= link_to "Edit this recipe", edit_user_recipe_path(current_user, c) %>
+  )<br>
       
   <%= c.ingredient_list  %>
   <br>
 
 <br><span style="border: 1px solid blue; padding: 3px; margin: 8px; border-radius: 2px;">
-<%= link_to "Execute+", user_drawer_recipe_custom_update_url(drawer_id: "#{@drawer.id}", 
+<%= link_to "Execute+", user_drawer_recipe_execute_path(drawer_id: "#{@drawer.id}", 
 recipe_id: "#{c.id}", user_id: "#{current_user.id}" ) %></span><br><br><br>
 
 

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :drawers do 
     get 'go_shopping'
   resources :recipes do
-    get 'custom_update'
+    get 'execute'
       end
     end
   end

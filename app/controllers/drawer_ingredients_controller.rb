@@ -1,3 +1,3 @@
 class DrawerIngredientsController < ApplicationController
-
+    
 end

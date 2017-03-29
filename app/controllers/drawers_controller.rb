@@ -8,7 +8,7 @@ class DrawersController < ApplicationController
     def update 
     @user = User.find_by(id: params[:id])
     @drawer = Drawer.find_by(id: params[:id])
-    @drawer.update_attributes(update_list: params[:update_list])
+    @drawer.update_attributes(drawer_params)
     redirect_to edit_user_drawer_path(@user, @drawer)
     end
     

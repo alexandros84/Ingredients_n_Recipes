@@ -23,11 +23,16 @@
 Update your inventory: 
 <br><br>
 Instructions: to update the quantities of your inventory, simply enter the name of the ingredient 
-present in your inventory followed by a semi-colon and the amount of material you 
-want to have in grams, like that: "peech: 250 appricot: 300". When you are happy with your changes simply press update.  
+whose quantity you want to change, followed by a semi-colon and the amount of material you 
+want to have in grams, like that: "peech: 250 appricot: 300". When you are happy with your changes 
+simply press update. Important: this form is to change the quantities of existing ingredients in your
+inventory. To rename an individual ingredient please click the name of the ingredient, you 
+wish to alter, from the following list. To add a new ingredient, click <%= link_to "here", 
+new_drawer_drawer_ingredient_path(@drawer) %>. To remove an individual ingredient from your inventory
+please click its name from the inventory list at the bottom of this page.  
 <br><br>
 <% a.each do |x| %>
-<%= x.ingredient_name %>: 
+<%= link_to "#{x.ingredient_name}", "/drawers/#{@drawer.id}/drawer_ingredients/#{x.id}/edit" %>: 
 <%= x.quantity %> | 
 <% end %>
 <br><br>
@@ -43,3 +48,10 @@ want to have in grams, like that: "peech: 250 appricot: 300". When you are happy
     <% end %>
   </div>
 </div>
+<br><br>
+Remove ingredient: <br><br>
+Please note that this might have an impact on your ability to execute your recipes.<br>
+<% a.each do |x| %>
+<%= link_to "#{x.ingredient_name}", (url_for([@drawer, x])), method: :delete, data: { confirm: "You sure?" }  %> 
+<% end %>
+<br><br>

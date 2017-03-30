@@ -10,8 +10,9 @@ class Drawer < ApplicationRecord
     b=x.split(": ")
     assoc=DrawerIngredient.where(drawer_id: self.id)
     instance=assoc.find_by(ingredient_name: b[0])
-    instance.update_attributes(quantity: b[1])
+    instance.update_attributes(quantity: b[1].to_i)
   end
+  
   end
     
   

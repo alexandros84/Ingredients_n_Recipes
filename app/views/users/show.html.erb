@@ -1,8 +1,11 @@
 <%= @user.name %><br><br>
 <%= link_to "New recipe?", new_user_recipe_path(@user, @recipe) %>
+<% i=DrawerIngredient.where(drawer_id: @drawer.id) %>
+<% if !(i.nil?) && !(i.empty?) %>
 || 
 <%= link_to "Go shopping!", user_drawer_go_shopping_url(drawer_id: "#{@drawer.id}", 
  user_id: "#{current_user.id}" ) %> 
+<% end %>
 <br><br>
 
 <%= link_to "#{@drawer.my_inventory}", edit_user_drawer_path(@user, @drawer) %>: <br>

@@ -55,6 +55,8 @@ class RecipesController < ApplicationController
         end
       end
       c.compact!
+      c=c.sort
+      d=d.sort
       number=c.length
       f=[]
       (1..number).each do |x|

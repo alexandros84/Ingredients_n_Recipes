@@ -13,17 +13,17 @@ class DrawersController < ApplicationController
     end
     
     def go_shopping
-    
-    @drawer = Drawer.find_by(id: current_user.drawers.first.id)
-    @recipe = Recipe.find_by(id: params[:recipe_id])
-    
-    b=@drawer.attributes.to_a[2..13]
-    phrase=b.map!{|p|
-      "#{p[0]}: 4*current_user.recipes.maximum(:#{p[0]}), "}
-    phrase=phrase.join.split("").reverse.drop(2).reverse.join
-    phrase="{"+phrase+"}"
-    @drawer.update_attributes(eval(phrase))
-   
+    @user= current_user
+    @drawer = current_user.drawers.first
+    inventory_ingredients= DrawerIngredient.where(drawer_id: @drawer.id)
+    inventory_ingredients_a=inventory_ingredients.to_a.map!{|x| x= [x.ingredient_name, x.quantity]}
+    inventory_ingredients_a.each do |x|
+      instance=inventory_ingredients.find_by(ingredient_name: x[0])
+      if (instance.quantity<5000)
+      instance.update_attributes(quantity: 5000)
+      else
+      end
+    end
     redirect_to current_user
     
     end

@@ -1,11 +1,16 @@
 class RecipesController < ApplicationController
   
+  before_action :check_logged_in
+  before_action :check_if_authorized
+  
   def new
+    @user = User.find_by(id: params[:user_id])
     @recipe = Recipe.new
   end
   
   def create 
-    @drawer = current_user.drawers.first
+    @user = User.find_by(id: params[:user_id])
+    @drawer = @user.drawers.first
     @recipe = current_user.recipes.build(recipe_params)
       if @recipe.save
       flash[:success]= "Your recipe is ready!"
@@ -17,62 +22,68 @@ class RecipesController < ApplicationController
   end
   
   def show 
-    @recipe = Recipe.find_by(id: params[:id])
     @user = User.find_by(id: params[:user_id])
+    @recipe = Recipe.find_by(id: params[:id])
   end
   
   def edit
-    @user= current_user
+    @user = User.find_by(id: params[:user_id])
     @recipe = Recipe.find_by(id: params[:id])
   end
   
   def update 
-    @user= current_user
+    @user = User.find_by(id: params[:user_id])
     @recipe = Recipe.find_by(id: params[:id])
     @recipe.update_attributes(recipe_params)
     redirect_to user_path(current_user)
   end
   
   def destroy
-    @user= current_user
+    @user = current_user
     @recipe = Recipe.find_by(id: params[:id])
     @recipe.destroy
     redirect_to user_path current_user
   end
-  
+    
     def execute
+      
       @user= User.find_by(id: params[:user_id])
       @drawer= Drawer.find_by(id: params[:drawer_id])
       @recipe= Recipe.find_by(id: params[:recipe_id])
       a= DrawerIngredient.where(drawer_id: @drawer.id)
       b= Ingredient.where(recipe_id: @recipe.id)
-      c= a.to_a.map{|x| x.ingredient_name } 
-      d= b.to_a.map{|x| x.name }
-      c.map! do |x| 
-        if ((d.include? x) || (d.include? x.singularize) || (d.include? x.pluralize)) 
-        x
-        else
-        end
+      
+      b.each do |x|
+        
+        val_a = x.quantity
+        instance = a.find_by(ingredient_name: x.name)
+        val_b = instance.quantity
+        
+        instance.update_attributes(quantity: val_b - val_a )
       end
-      c.compact!
-      c=c.sort
-      d=d.sort
-      number=c.length
-      f=[]
-      (1..number).each do |x|
-        f << [c[x-1], d[x-1]]
-      end
-      (1..number).each do |c|
-        r_i_i= b.find_by(name: f[c-1][1])
-        recipe_value=r_i_i.quantity
-        s_i_i= a.find_by(ingredient_name: f[c-1][0])
-        stock_value=s_i_i.quantity
-        s_i_i.update_attributes(quantity: stock_value - recipe_value)
-      end
+      
       redirect_to user_path(current_user)
+      
     end
-  
-    private 
+    
+    private
+    
+    def check_logged_in
+      if current_user.nil?
+      flash[:danger] = "Please Signup/Log in first."
+      redirect_to root_path
+      else
+      end
+    end 
+    
+    def check_if_authorized
+      @user = User.find_by(id: params[:user_id])
+      if @user == current_user
+      else
+        redirect_to root_path
+        flash[:danger] = "It doesn't seem you are authorized to take this action."
+      end
+    end
     
     def recipe_params
       params.require(:recipe).permit(:title, :execution, :user_id, :ingredient_list)

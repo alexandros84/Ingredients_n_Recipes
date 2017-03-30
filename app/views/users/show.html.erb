@@ -1,6 +1,6 @@
 <%= @user.name %><br><br>
 <%= link_to "New recipe?", new_user_recipe_path(@user, @recipe) %>
-<% i=DrawerIngredient.where(drawer_id: @drawer.id) %>
+<% i=DrawerIngredient.of @drawer %>
 <% if !(i.nil?) && !(i.empty?) %>
 || 
 <%= link_to "Go shopping!", user_drawer_go_shopping_url(drawer_id: "#{@drawer.id}", 
@@ -9,7 +9,7 @@
 <br><br>
 
 <%= link_to "#{@drawer.my_inventory}", edit_user_drawer_path(@user, @drawer) %>: <br>
-<% DrawerIngredient.where(drawer_id: @drawer.id).each do |x| %>
+<% i.order(quantity: :desc).each do |x| %>
 <%= x.ingredient_name %>: 
 <%= x.quantity %> | 
 <% end %><br>
@@ -27,7 +27,9 @@ My recipes:<br><br>
   <%= link_to "Edit this recipe", edit_user_recipe_path(current_user, c) %>
   )<br>
       
-  <%= c.ingredient_list  %>
+  <% Ingredient.scope(c).each do |x|  %>
+  <%= "#{x.name}: #{x.quantity} | " %>
+  <% end %>
   <br>
 
 <br><span style="border: 1px solid blue; padding: 3px; margin: 8px; border-radius: 2px;">

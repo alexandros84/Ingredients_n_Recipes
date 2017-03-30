@@ -5,7 +5,7 @@
   <% else %>
   
 <br><br>
-Hey, <%= link_to "#{current_user.name}", current_user %>! Welcome to the beautiful world of a 
+Hey, <%= link_to "#{current_user.email}", current_user %>! Welcome to the beautiful world of a 
   well-managed kitchen ;)
   
 <br><br><%= link_to "New recipe?", new_user_recipe_path(current_user, @recipe) %>

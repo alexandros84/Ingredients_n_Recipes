@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @drawer = Drawer.find_by(id: current_user.drawers.first.id)
-    flash.now[:success]="hey, #{@user.name} don't forget that you are cool! <3"
   end
   
   def new
@@ -56,7 +55,7 @@ class UsersController < ApplicationController
     end 
     
     def check_if_authorized
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
       if @user == current_user
       else
         redirect_to root_path

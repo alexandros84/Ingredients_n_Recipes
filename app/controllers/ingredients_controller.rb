@@ -3,30 +3,6 @@ class IngredientsController < ApplicationController
   before_action :check_logged_in
   before_action :check_if_authorized
   
-  def new
-    @user = User.find_by(id: params[:user_id])
-  end
-
-  def show
-    @user = User.find_by(id: params[:user_id])
-  end
-
-  def create 
-    @user = User.find_by(id: params[:user_id])
-  end
-  
-  def edit
-    @user = User.find_by(id: params[:user_id])
-  end
-  
-  def update
-    @user = User.find_by(id: params[:user_id])
-  end
-  
-  def destroy
-    @user = User.find_by(id: params[:user_id])
-  end
-  
   private
   
   def check_logged_in

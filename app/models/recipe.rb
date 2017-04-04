@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+  
   belongs_to :user 
   has_many :ingredients, dependent: :destroy
   
@@ -83,12 +84,13 @@ end
   def update_quantity_existing_recipe_ingredient
     @user = User.find_by(id: self.user_id)
     a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    d= Ingredient.where(recipe_id: self.id)
     c=a.map do |x| 
       b=x.split(": ")
       x=[b[0], b[1]]
     end
     c.each do |x| 
-      instance=Ingredient.find_by(name: x[0])
+      instance= d.find_by(name: x[0])
       instance.update_attributes(quantity: x[1])
     end
     

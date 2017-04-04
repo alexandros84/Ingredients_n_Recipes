@@ -1,6 +1,9 @@
 <% provide(:title, 'New Recipe') %>
 <h1>Ingredients:</h1>
-
+Instructions: This is a "smart" update/delete/create form for your recipe's ingredients. Simply add, remove 
+or alter the quantity of the ingredient you need to change and a set of after_update callbacks and regexes will
+do the rest for you. The only requirement? Your ingredient can be 3-40 characters long [a-z ] and they have to be
+seperated from the amount of material with a colon, like that "red hot chili peppers: 4000, onions: 5700." 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
       <%= form_for ([@user, @recipe]), url: {action: "update"} do |f| %>

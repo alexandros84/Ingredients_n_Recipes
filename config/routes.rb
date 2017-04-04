@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   resources :recipes
   end
   
-    resources :api_requests 
-  
+  resources :users do
+  resources :api_requests
+  end
+    
   resources :users do 
   resources :drawers
   end

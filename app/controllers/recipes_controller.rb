@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  
+
   before_action :check_logged_in
   before_action :check_if_authorized
   
@@ -39,11 +39,17 @@ class RecipesController < ApplicationController
   end
   
   def destroy
-    @user = current_user
+    @user = User.find_by(id: params[:user_id])
     @recipe = Recipe.find_by(id: params[:id])
     @recipe.destroy
     redirect_to user_path current_user
   end
+  
+  def index
+    @user = User.find_by(id: params[:user_id])
+    posts = @user.recipes.all
+        render json: {status: 'SUCCESS', message: 'Loaded all recipess', data: posts}, status: :ok
+  end 
     
     def execute
       

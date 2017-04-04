@@ -8,5 +8,7 @@ data: { confirm: "You sure?" } %><br><br>
 <% end %>
 <br>
 <br>
+<%= edit_user_drawer_path(@user, token: SecureRandom.random_number(100), pride: SecureRandom.random_number(100)) %>
 <%= link_to "User profile", current_user %>
 <br><br>
+

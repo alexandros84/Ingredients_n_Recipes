@@ -1,5 +1,5 @@
 <br><br>
-<% a=DrawerIngredient.where(drawer_id: @drawer.id) %>
+<% a=DrawerIngredient.where(drawer_id: @drawer.id).order(quantity: :desc) %>
 <%= link_to "User", current_user %>'s Inventory:<br><br>
 <% a.each do |x| %>
 <%= x.ingredient_name %>: 
@@ -52,6 +52,6 @@ please click its name from the inventory list at the bottom of this page.
 Remove ingredient: <br><br>
 Please note that this might have an impact on your ability to execute your recipes.<br>
 <% a.each do |x| %>
-<%= link_to "#{x.ingredient_name}", (url_for([@drawer, x])), method: :delete, data: { confirm: "You sure?" }  %> 
+<%= link_to "#{x.ingredient_name}", (url_for([@drawer, x])), method: :delete, data: { confirm: "You sure?" }  %> | 
 <% end %>
 <br><br>

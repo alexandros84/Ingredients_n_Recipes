@@ -13,7 +13,7 @@ class Recipe < ApplicationRecord
   def create_new_drawer_ingredients
     @user = User.find_by(id: self.user_id)
     @drawer = Drawer.find_by(user_id: @user.id)
-    a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.to_s.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
   a.each do |x|
     b=x.split(": ")
     assoc=DrawerIngredient.where(drawer_id: @drawer.id)
@@ -27,7 +27,7 @@ end
   
   def create_recipe_ingredients
     @user = User.find_by(id: self.user_id)
-    a=self.ingredient_list.downcase.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.downcase.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
   a.each do |x|
     b=x.split(": ")
     self.ingredients.create(name: b[0], quantity: b[1].to_i, user_id: @user.id, recipe_id: self.id)
@@ -37,7 +37,7 @@ end
   def update_addition_inventory
     @user = User.find_by(id: self.user_id)
     @drawer = Drawer.find_by(user_id: @user.id)
-    a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.to_s.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
   a.each do |x|
     b=x.split(": ")
     assoc=DrawerIngredient.where(drawer_id: @drawer.id)
@@ -51,7 +51,7 @@ end
   
   def update_add_ingredient_in_recipe
     @user = User.find_by(id: self.user_id)
-    a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.to_s.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
     d= Ingredient.where(recipe_id: self.id)
     d=d.to_a.map!{|x| x=x.name}
   a.each do |x|
@@ -65,7 +65,7 @@ end
   
   def update_take_ingredient_from_recipe
     @user = User.find_by(id: self.user_id)
-    a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.to_s.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
     d= Ingredient.where(recipe_id: self.id)
     e=d.to_a.map!{|x| x=x.name}
   a.map! do |x|
@@ -83,7 +83,7 @@ end
   
   def update_quantity_existing_recipe_ingredient
     @user = User.find_by(id: self.user_id)
-    a=self.ingredient_list.to_s.scan(/\b\w{3,12}: \d{0,5}\b/)
+    a=self.ingredient_list.to_s.scan(/\b[a-z -]{3,40}: \d{1,6}\b/)
     d= Ingredient.where(recipe_id: self.id)
     c=a.map do |x| 
       b=x.split(": ")

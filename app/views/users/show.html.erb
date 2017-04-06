@@ -1,3 +1,4 @@
+<br>
 <%= @user.name %><br><br>
 <%= link_to "New recipe?", new_user_recipe_path(@user, @recipe) %>
 <% i=DrawerIngredient.of @drawer %>
@@ -19,7 +20,7 @@
 My recipes:<br><br>
 
       <% current_user.recipes.all.each do |c| %>
-    
+  
   <span style="font-size: 21px;">
   <%= c.title  %> </span>
   (
@@ -32,11 +33,14 @@ My recipes:<br><br>
   <% end %>
   <br>
 
+  <%# c.ingredients.each do |x| %>
+  <%# ii = DrawerIngredient.find_by(ingredient_name: x.name) %>
+  <%# if x.quantity>=ii.quantity %>
 <br><span style="border: 1px solid blue; padding: 3px; margin: 8px; border-radius: 2px;">
 <%= link_to "Execute+", user_drawer_recipe_execute_path(drawer_id: "#{@drawer.id}", 
 recipe_id: "#{c.id}", user_id: "#{current_user.id}" ) %></span><br><br><br>
+  <%# else %>
 
-
-
-
+  <%# end %>
+  <%# end %>
       <% end %>

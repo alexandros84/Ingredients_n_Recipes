@@ -2,13 +2,29 @@
 
 <%= @recipe.title %> | <%= link_to "Destroy this recipe", user_recipe_path(current_user, @recipe), method: :delete, 
 data: { confirm: "You sure?" } %><br><br>
-<% Ingredient.where(recipe_id: @recipe.id).each do |x| %>
+<% a= Ingredient.where(recipe_id: @recipe.id) %>
+<% a.each do |x| %>
 <%= x.name %>: 
 <%= x.quantity %> | 
 <% end %>
 <br>
 <br>
-<%= edit_user_drawer_path(@user, token: SecureRandom.random_number(100), pride: SecureRandom.random_number(100)) %>
+<% data = {
+  labels: a.to_a.map!{|x| x.name },
+  datasets: [
+    {
+        label: "Mass Distribution",
+        backgroundColor: "rgba(15,275,217,0.7)",
+        borderColor: "rgba(15,217,175,1)",
+        data: a.to_a.map!{|x| x.quantity }
+    }
+  ]
+} %>
+<% options = { width: 300, height: 300 } %>
+<div id="graph2"><%= doughnut_chart data, options %></div>
+<br>
+<br>
+<%#= edit_user_drawer_path(@user, token: SecureRandom.random_number(100), pride: SecureRandom.random_number(100)) %>
 <%= link_to "User profile", current_user %>
 <br><br>
 

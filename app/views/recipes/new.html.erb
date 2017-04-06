@@ -1,6 +1,13 @@
 <% provide(:title, 'New Recipe') %>
 <h1>Ingredients:</h1>
 
+Instructions: this is a smart form! To add the ingredients of your recipe on our database, simply fill 
+the ingredient list on the same way you would write them on a notebook and we will do the rest. The form 
+is even adding automatically any "new" ingredient in your inventory, making the adding and management of 
+recipes a pleasure! The only requirement is to fill the ingredient list form after the following format:
+"red peppers: 2300, black pepper: 3000, tuna: 5000." For troubleshooting purposes the universal regex we 
+use to handle your data is: "\b[a-z -]{3,40}: \d{1,6}\b".
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
       <%= form_for @recipe, url: {action: "create"} do |f| %>
